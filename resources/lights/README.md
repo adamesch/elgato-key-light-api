@@ -9,6 +9,6 @@
 ## Considerations
 (*) Attempting to set a light's brightness to a low value like `2` may not do anything.
 
-(**) The 'Control Center' UI only allows color temperature changes from 2900K - 7000K in 50K increments. The Key Light API maps those values to a somewhat strange range of integers that may differ light to light. Values less than `143` or greater than `344` will automatically be changed to the appropiate extreme. If attempting to set a light's temperature to something specific, the easiest way to find the correct value to send would be
-1. set the desired color temperature manually in the 'Control Center' app
-2. query the value of that color temperature using `GET /lights`
+(**) The 'Control Center' UI only allows color temperature changes from 2900K - 7000K in 50K increments. To convert the values used by the API to Kelvin (like it is displayed in the Elgato application), you simply have to divide 1.000.000 by the given value and round the result to the nearest number divisable by 50.  
+When a value higher than the minimum or maximum (`143` or `344`) is sent, the value will be set to the closer extreme.  
+To convert values from Kelvin back to the API format, just divide 1.000.000 by the amount of Kelvin and round to the closest natural number.
